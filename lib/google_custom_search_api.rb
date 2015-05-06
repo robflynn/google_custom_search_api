@@ -112,10 +112,12 @@ module GoogleCustomSearchApi
     api_key = opts[:api_key] || GOOGLE_API_KEY
     cx_id = opts[:cx_id] || GOOGLE_SEARCH_CX
 
-    opts.delete_if {|k| [:api_key,:cx_id].include? k}
+    opt_back = opts
+
+    opt_back.delete_if {|k| [:api_key,:cx_id].include? k}
 
     uri = Addressable::URI.new
-    uri.query_values = opts
+    uri.query_values = opt_back
     begin
       params.merge!(GOOGLE_SEARCH_PARAMS)
     rescue NameError
