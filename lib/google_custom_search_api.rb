@@ -41,8 +41,12 @@ module GoogleCustomSearchApi
       # results = ResponseData.new(read_search_data("google_poker_#{opts[:start]}"))
       yield results
       res << results
-      if results.queries.keys.include?("nextPage")
-        opts[:start] = results.queries.nextPage.first.startIndex
+      if results.keys.include? "queries"
+        if results.queries.keys.include?("nextPage")
+          opts[:start] = results.queries.nextPage.first.startIndex
+        else
+          opts[:start] = nil
+        end        
       else
         opts[:start] = nil
       end
