@@ -112,7 +112,7 @@ module GoogleCustomSearchApi
     api_key = opts[:api_key] || GOOGLE_API_KEY
     cx_id = opts[:cx_id] || GOOGLE_SEARCH_CX
 
-    opt_back = opts
+    opt_back = opts.clone
 
     opt_back.delete_if {|k| [:api_key,:cx_id].include? k}
 
