@@ -108,6 +108,12 @@ module GoogleCustomSearchApi
   def url(query, opts = {})
     opts[:q] = query
     opts[:alt] ||= "json"
+
+    api_key = opts[:api_key] || GOOGLE_API_KEY
+    cx_id = opts[:cx_id] || GOOGLE_SEARCH_CX
+
+    opts.delete_if {|k| [:api_key,:cx_id].include? k}
+
     uri = Addressable::URI.new
     uri.query_values = opts
     begin
